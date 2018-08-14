@@ -33,61 +33,22 @@ task main()
 		getJoystickSettings(joystick);
 
 		int power1 = -1*joystick.joy1_y1, power2 = -1*joystick.joy1_y2;
-
-		getJoystickSettings(joystick);
-		if(abs(joystick.joy1_y1) > threshold && abs(joystick.joy1_y1) < threshold1)
-		{
-			motor[leftMotor] = power1;
-			getJoystickSettings(joystick);
-		}
-		else if (abs(joystick.joy1_y1) > threshold && joystick.joy1_y1 > threshold1)
-		{
+		
+		if(joystick.joy1_y1 > threshold1)
 			motor[leftMotor] = -100;
-			getJoystickSettings(joystick);
-		}
-		else if (abs(joystick.joy1_y1) > threshold && joystick.joy1_y1 < threshold2)
-		{
-			motor[leftMotor] = 100;
-			getJoystickSettings(joystick);
-		}
-		else if(joy1Btn(05) == 1)
-		{
-			motor[leftMotor] = 0;
-			getJoystickSettings(joystick);
-		}
-		else if(joy1Btn(06) == 1)
-		{
-			motor[leftMotor] = 100;
-			getJoystickSettings(joystick);
-		}
+		else if (abs(joystick.joy1_y1) < threshold2)
+			motor[leftMotor] = -100;
+		else if (abs(joystick.joy1_y1) > threshold)
+			motor[leftMotor] = power1;
 		else
 			motor[leftMotor] = 0;
 		getJoystickSettings(joystick);
-		if(abs(joystick.joy1_y2) > threshold && abs(joystick.joy1_y2) < threshold1)
-		{
-			motor[rightMotor] = power2;
-			getJoystickSettings(joystick);
-		}
-		else if (abs(joystick.joy1_y2) > threshold && joystick.joy1_y2 > threshold1)
-		{
+		if(joystick.joy1_y2 > threshold1)
 			motor[rightMotor] = -100;
-			getJoystickSettings(joystick);
-		}
-		else if (abs(joystick.joy1_y2) > threshold && joystick.joy1_y2 < threshold2)
-		{
+		else if (joystick.joy1_y2 < threshold2)
 			motor[rightMotor] = 100;
-			getJoystickSettings(joystick);
-		}
-		else if(joy1Btn(05) == 1)
-		{
-			motor[rightMotor] = 100;
-			getJoystickSettings(joystick);
-		}
-		else if(joy1Btn(06) == 1)
-		{
-			motor[rightMotor] = 0;
-			getJoystickSettings(joystick);
-		}
+		else if (abs(joystick.joy1_y2) > threshold)
+			motor[rightMotor] = power2;
 		else
 			motor[rightMotor] = 0;
 		getJoystickSettings(joystick);
@@ -95,19 +56,16 @@ task main()
 		{
 			motor[armMotor] = 37;
 			nMotorEncoder[armMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else if(joystick.joy1_TopHat == 4)
 		{
 			motor[armMotor] = -5;
 			nMotorEncoder[armMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else if(joy1Btn(2) == 1)
 		{
 			jolt(1);
 			nMotorEncoder[armMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else
 			motor[armMotor] = armMotorHold();
@@ -116,38 +74,28 @@ task main()
 		{
 			motor[elbowMotor] = 65;
 			nMotorEncoder[elbowMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else if(joystick.joy1_TopHat == 6)
 		{
 			motor[elbowMotor] = 5;
 			nMotorEncoder[elbowMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else if(joy1Btn(4) == 1)
 		{
 			jolt(2);
 			nMotorEncoder[elbowMotor] = 0;
-			getJoystickSettings(joystick);
 		}
 		else
 			motor[elbowMotor] = elbowMotorHold();
 		getJoystickSettings(joystick);
 		if(joy1Btn(1) == 1)
-		{
 			grab();
-			getJoystickSettings(joystick);
-		}
 		else if(joy1Btn(3) == 1)
-		{
 			release();
-			getJoystickSettings(joystick);
-		}
 		else
 		{
 			servo[rHand] = ServoValue[rHand];
 			servo[lHand] = ServoValue[lHand];
-			getJoystickSettings(joystick);
 		}
 		getJoystickSettings(joystick);
 	}
